@@ -18,18 +18,48 @@ use yii\web\IdentityInterface;
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public static function tableName()
     {
         return 'user';
     }
 
     /**
-     * Finds an identity by the given ID.
-     *
-     * @param string|int $id the ID to be looked for
-     * @return IdentityInterface|null the identity object that matches the given ID.
+     * {@inheritdoc}
      */
-    public static function findIdentity($id)
+    public function rules()
+    {
+        return [
+            [['username', 'password'], 'required'],
+            [['created_at'], 'safe'],
+            [['admin'], 'integer'],
+            [['username', 'password'], 'string', 'max' => 255],
+            [['username'], 'unique'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'password' => 'Password',
+            'created_at' => 'Created At',
+            'admin' => 'Admin',
+        ];
+    }
+
+    /**
+     * Gets query for [[Portfolios]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+ public static function findIdentity($id)
     {
         return static::findOne($id);
     }
@@ -58,7 +88,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->auth_key;
+        return null;
     }
 
     /**
@@ -69,5 +99,4 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->getAuthKey() === $authKey;
     }
-}
 }
