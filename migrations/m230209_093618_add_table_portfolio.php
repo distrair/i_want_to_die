@@ -14,7 +14,7 @@ class m230209_093618_add_table_portfolio extends Migration
     {
         $this->createTable('{{%portfolio}}', [
             'id' => $this->primaryKey(),
-            'idUser' => $this->integer()->notNull(),
+            'idUser' => $this->integer(),
             'description' => $this->text()->notNull(),
             'skills' => $this->string(255)->notNull(),
             'photo' => $this->string(255),

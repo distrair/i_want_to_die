@@ -32,7 +32,7 @@ class Portfolio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idUser', 'description', 'skills', 'knowledge'], 'required'],
+            [['description', 'skills', 'knowledge'], 'required'],
             [['idUser'], 'integer'],
             [['description'], 'string'],
             [['skills', 'photo', 'knowledge'], 'string', 'max' => 255],
