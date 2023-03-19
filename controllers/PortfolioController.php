@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Portfolio;
 use app\models\PortfolioSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -69,7 +70,8 @@ class PortfolioController extends Controller
     {
         $model = new Portfolio();
 
-        if ($this->request->isPost) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->idUser = Yii::$app->user->id;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

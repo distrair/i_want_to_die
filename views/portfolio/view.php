@@ -2,13 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Portfolio;
+use yii\db\BaseActiveRecord;
 
 /** @var yii\web\View $this */
 /** @var app\models\Portfolio $model */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Portfolios', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="portfolio-view">
@@ -25,17 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'idUser',
-            'description:ntext',
-            'skills',
-            'photo',
-            'knowledge',
-        ],
-    ]) ?>
+    <?php $data = Portfolio::findOne($model) ?>
+    <?php echo Html::decode($data['description'])?>
 
 </div>

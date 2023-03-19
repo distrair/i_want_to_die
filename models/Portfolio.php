@@ -36,7 +36,7 @@ class Portfolio extends \yii\db\ActiveRecord
             [['idUser'], 'integer'],
             [['description'], 'string'],
             [['skills', 'photo', 'knowledge'], 'string', 'max' => 255],
-            [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['idUser' => 'id']],
+            [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => user::class, 'targetAttribute' => ['idUser' => 'id']],
         ];
     }
 
@@ -60,7 +60,7 @@ class Portfolio extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdUser0()
+    public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'idUser']);
     }
