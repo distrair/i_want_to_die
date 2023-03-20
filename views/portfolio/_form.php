@@ -17,10 +17,8 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'skills')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'knowledge')->textInput(['maxlength' => true]) ?>
-
+    <br>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

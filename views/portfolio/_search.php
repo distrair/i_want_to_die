@@ -23,8 +23,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'skills') ?>
 
-    <?= $form->field($model, 'photo') ?>
-
     <?php // echo $form->field($model, 'knowledge') ?>
 
     <div class="form-group">

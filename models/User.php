@@ -99,4 +99,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->getAuthKey() === $authKey;
     }
+    public static function findByUsername($username)
+    {
+        return self::find()->where(['username'=>$username])->one();
+    }
+
+    public function validatePassword($password)
+    {
+        return $this->password === $password;
+    }
 }

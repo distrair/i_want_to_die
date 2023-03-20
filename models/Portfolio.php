@@ -11,7 +11,6 @@ use Yii;
  * @property int $idUser
  * @property string $description
  * @property string $skills
- * @property string|null $photo
  * @property string $knowledge
  *
  * @property User $idUser0
@@ -35,7 +34,7 @@ class Portfolio extends \yii\db\ActiveRecord
             [['description', 'skills', 'knowledge'], 'required'],
             [['idUser'], 'integer'],
             [['description'], 'string'],
-            [['skills', 'photo', 'knowledge'], 'string', 'max' => 255],
+            [['skills', 'knowledge'], 'string', 'max' => 255],
             [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => user::class, 'targetAttribute' => ['idUser' => 'id']],
         ];
     }
@@ -50,7 +49,6 @@ class Portfolio extends \yii\db\ActiveRecord
             'idUser' => 'Id User',
             'description' => 'Description',
             'skills' => 'Skills',
-            'photo' => 'Photo',
             'knowledge' => 'Knowledge',
         ];
     }

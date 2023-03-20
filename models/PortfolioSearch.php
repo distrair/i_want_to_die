@@ -18,7 +18,7 @@ class PortfolioSearch extends Portfolio
     {
         return [
             [['id', 'idUser'], 'integer'],
-            [['description', 'skills', 'photo', 'knowledge'], 'safe'],
+            [['description', 'skills', 'knowledge'], 'safe'],
         ];
     }
 
@@ -64,7 +64,6 @@ class PortfolioSearch extends Portfolio
 
         $query->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'skills', $this->skills])
-            ->andFilterWhere(['like', 'photo', $this->photo])
             ->andFilterWhere(['like', 'knowledge', $this->knowledge]);
 
         return $dataProvider;

@@ -24,7 +24,9 @@ use yii\db\BaseActiveRecord;
             ],
         ]) ?>
     </p>
-    <?php $data = Portfolio::findOne($model) ?>
-    <?php echo Html::decode($data['description'])?>
+    <?php $data = Portfolio::findOne($model); ?>
+    <?php echo '<p>Скиллы: ' . $data->skills . '</p>'?>
+    <?php echo '<p>Знания: ' . $data->knowledge . '</p>'?>
+    <?php echo Html::decode($data['description']);?>
 
 </div>
