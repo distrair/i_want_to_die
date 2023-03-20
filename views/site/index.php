@@ -1,8 +1,11 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-/** @var yii\web\View $this */
 
+/** @var yii\web\View $this */
+/** @var yii\base\View $this */
+/** @var yii\web\Controller $this */
+$portfolio = \app\models\Portfolio::class;
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">

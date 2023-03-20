@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Portfolio;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -72,12 +73,22 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            $user = Yii::$app->user->identity;
+            $porfolio = Portfolio::find()->where(['idUser' => $user->id])->one();
+            if ($porfolio !== null){
+                return $this->redirect(['portfolio/view', 'id' => $porfolio->id]);
+            }
+            return $this->redirect(['portfolio/create']);
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $this->goHome();
+            $user = Yii::$app->user->identity;
+            $porfolio = Portfolio::find()->where(['idUser' => $user->id])->one();
+            if ($porfolio !== null){
+                return $this->redirect(['portfolio/view', 'id' => $porfolio->id]);
+            }
+            return $this->redirect(['portfolio/create']);
         }
 
         $model->password = '';
