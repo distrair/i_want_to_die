@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Portfolio;
 use app\models\PortfolioSearch;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -19,17 +20,22 @@ class PortfolioController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['index'],
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback'=>function(){
+                            return Yii::$app->user->identity->admin===1;
+                        }
                     ],
                 ],
-            ]
-        );
+            ],
+        ];
     }
 
     /**

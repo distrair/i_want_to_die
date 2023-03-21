@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Portfolio;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -85,8 +86,11 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $user = Yii::$app->user->identity;
             $porfolio = Portfolio::find()->where(['idUser' => $user->id])->one();
+            $admin = Yii::$app->user->identity->admin;
             if ($porfolio !== null){
                 return $this->redirect(['portfolio/view', 'id' => $porfolio->id]);
+            } else if ($admin===1){
+                return $this->redirect(['portfolio/index']);
             }
             return $this->redirect(['portfolio/create']);
         }
